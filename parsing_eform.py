@@ -8,7 +8,8 @@ def read_responses_to_df():
     pass
 
 def read_questions_and_responses_to_df(file_name):
-    survey_data = pd.read_excel(io=file_name, sheet_name=None)  # will have to see if the dictionary returned uses sheet names as keys.
+    # this basically an alias so need this step would probably fit in with the step that builds the array for responses
+    survey_data = pd.read_excel(io=file_name, sheet_name=None) 
     return survey_data
     
 
