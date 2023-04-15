@@ -1,16 +1,21 @@
 import pandas as pd
-import numpy as np
 
-def read_questions_to_df():
-    pass
 
-def read_responses_to_df():
-    pass
-
-def read_questions_and_responses_to_df(file_name):
-    # this basically an alias so need this step would probably fit in with the step that builds the array for responses
-    survey_data = pd.read_excel(io=file_name, sheet_name=None) 
+def read_questions_and_responses_totals(questions_file_name, responses_file_name):
+    questions = pd.read_excel(questions_file_name)
+    responses = pd.read_excel(responses_file_name)
+    survey_data = dict.fromkeys(questions.columns)
+    for col in questions.columns:
+        survey_data[col] = pd.DataFrame(data={}, index=questions[col].values, columns=[col])
+        for value in questions[col].values:
+            survey_data.loc[[value, col]] = len(responses[responses[col] == value])
     return survey_data
-    
 
-# will need something like an array to save responses
+
+def read_questions_and_responses_related(questions_file_name, responses_file_name):
+    questions = pd.read_excel(questions_file_name)
+    responses = pd.read_excel(responses_file_name)
+
+# TODO: Separate demographics from the actual data
+# TODO: encode the length of the response sheet as the number of responses you get.
+    
