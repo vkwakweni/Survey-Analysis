@@ -1,11 +1,12 @@
 # Scale Responses
-likert_scale = {"Strongly disagree": 1,
-                "Somewhat disagree": 2,
-                "Disagree": 3,
+
+likert_scale = {"Strongly Disagree": 1,
+                "Disagree": 2,
+                "Slightly Disagree": 3,
                 "Neutral": 4,
-                "Agree": 5,
-                "Somewhat agree": 6,
-                "Strongly agree": 7}
+                "Slightly Agree": 5,
+                "Agree": 6,
+                "Strongly Agree": 7}
 
 # Specific columns – Column name
 demographic_columns = []
