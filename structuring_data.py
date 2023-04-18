@@ -2,9 +2,8 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import scipy.stats as stats
-
-
 # y = mx + c
+
 
 class LinReg:
     def __init__(self, x, y):
