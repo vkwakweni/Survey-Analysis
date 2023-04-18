@@ -12,6 +12,15 @@ def read_questions_and_responses_totals(questions_file_name, responses_file_name
     return survey_response_totals
 
 
+def get_pivot_table(response_totals, questions_with_same_possible_answers):
+    pivot_collector = []
+    for totals in response_totals:
+        see = list(response_totals[totals].index)
+        if list(response_totals[totals].index) == questions_with_same_possible_answers:
+            pivot_collector.append(response_totals[totals])
+    pivot_table = pd.concat(pivot_collector, axis=1)
+    return pivot_table
+
 def convert_words_to_numbers(responses_file_name, translations):
     return pd.read_csv(responses_file_name).dropna().replace(to_replace=translations)
 

@@ -1,5 +1,4 @@
 import numpy as np
-import scipy.stats
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import scipy.stats as stats
@@ -31,10 +30,9 @@ class LinReg:
                 "p-value": self.p_value,
                 "shapiro tests": {"x": self.x_shapiro_p[1], "y": self.y_shapiro_p[1]}}
 
-    def graph_data(self, show=False, save=False, output_file=""):
+    def graph_data(self, x_name="", y_name="", show=False, save=False, output_file=""):
         plt.plot(self.x, self.y, 'o')
-        y_pred = generate_predicted_line(self.x, self.y)
-        plt.plot(self.x, y_pred)
+        plt.plot(self.x, self.y_pred)
         if show:
             plt.show()
         if save:
@@ -46,8 +44,3 @@ def data_to_array(data, x_col_name, y_col_name):
     y = np.array(data[y_col_name])
     return x, y
 
-
-def generate_predicted_line(x, y):
-    model = LinearRegression().fit(x, y)
-    y_pred = model.predict(x)
-    return y_pred

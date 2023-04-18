@@ -7,6 +7,3 @@ likert_scale = {"Strongly Disagree": 1,
                 "Slightly Agree": 5,
                 "Agree": 6,
                 "Strongly Agree": 7}
-
-# Specific columns – Column name
-demographic_columns = []
