@@ -1,4 +1,5 @@
 # Scale Responses
+import numpy as np
 
 likert_scale = {"Strongly Disagree": 1,
                 "Disagree": 2,
@@ -6,4 +7,5 @@ likert_scale = {"Strongly Disagree": 1,
                 "Neutral": 4,
                 "Slightly Agree": 5,
                 "Agree": 6,
-                "Strongly Agree": 7}
+                "Strongly Agree": 7,
+                "Prefer Not To Say": np.nan}
