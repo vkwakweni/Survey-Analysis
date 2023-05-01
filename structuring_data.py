@@ -5,7 +5,7 @@ import scipy.stats as stats
 import pandas as pd
 
 
-class LinReg:
+class SurveyAnalysis:
     def __init__(self, x, y, x_name, y_name):
         self.x = x
         self.y = y
@@ -23,7 +23,7 @@ class LinReg:
         self.y_shapiro_p = stats.shapiro(y)[1]
         self.y_pred = self.model.predict(x)
 
-    def give_summary(self):
+    def give_all_significant_value(self):
         summary = pd.DataFrame(data={"coefficient of determination": self.r_sq,
                                      "intercept": self.intercept,
                                      "slope": self.slope,
@@ -38,14 +38,28 @@ class LinReg:
                                      "max for x": np.max(self.y),
                                      "standard deviation for x": np.std(self.x),
                                      "mean for x": np.mean(self.x),
+                                     "mode for x": int(stats.mode(self.x)),
                                      "min for y": np.min(self.y),
                                      "Q1 for y": np.percentile(self.y, 25),
                                      "median for y": np.percentile(self.y, 50),
                                      "Q3 for y": np.percentile(self.y, 75),
                                      "max for y": np.max(self.y),
                                      "standard deviation for y": np.std(self.y),
-                                     "mean for y": np.mean(self.y)}).T
+                                     "mean for y": np.mean(self.y),
+                                     "mode for y": int(stats.mode(self.x))}).T
         summary.columns = [f"x = {self.x_var}; y = {self.y_var}"]
+        return summary
+
+    def give_correlation_values(self):
+        summary = self.give_all_significant_value().loc[["coefficient of determination", "rank-order correlation",
+                                                         "p-value (spearman)"]]
+        return summary
+
+    def give_measures_of_central_tendency(self):
+        summary = self.give_all_significant_value().loc[["min for x", "Q1 for x", "median for x", "Q3 for x",
+                                                         "max for x", "mean for x", "mode for x",
+                                                         "mix for y", "Q1 for y", "median for y", "Q3 for y",
+                                                         "max for y", "mean for y", "mode for y"]]
         return summary
 
     def graph_data(self, show=False, save=False, output_file=""):
