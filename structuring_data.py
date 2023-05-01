@@ -19,8 +19,8 @@ class LinReg:
         y_listed = y.tolist()
         self.rank_order_correlation = stats.spearmanr(x_listed, y_listed).correlation
         self.p_value = stats.spearmanr(x_listed, y_listed).pvalue
-        self.x_shapiro_p = stats.shapiro(x)
-        self.y_shapiro_p = stats.shapiro(y)
+        self.x_shapiro_p = stats.shapiro(x)[1]
+        self.y_shapiro_p = stats.shapiro(y)[1]
         self.y_pred = self.model.predict(x)
 
     def give_summary(self):
@@ -28,9 +28,9 @@ class LinReg:
                                      "intercept": self.intercept,
                                      "slope": self.slope,
                                      "rank-order correlation (spearman)": self.rank_order_correlation,
-                                     "p-value": self.p_value,
-                                     "shapiro p-value tests for x": self.x_shapiro_p[1],
-                                     "shapiro p-value tests for y": self.y_shapiro_p[1],
+                                     "p-value (spearman)": self.p_value,
+                                     "shapiro p-value tests for x": self.x_shapiro_p,
+                                     "shapiro p-value tests for y": self.y_shapiro_p,
                                      "min for x": np.min(self.x),
                                      "Q1 for x": np.percentile(self.x, 25),
                                      "median for x": np.percentile(self.x, 50),
@@ -44,8 +44,7 @@ class LinReg:
                                      "Q3 for y": np.percentile(self.y, 75),
                                      "max for y": np.max(self.y),
                                      "standard deviation for y": np.std(self.y),
-                                     "mean for y": np.mean(self.y)})
-        summary = summary.T
+                                     "mean for y": np.mean(self.y)}).T
         summary.columns = [f"x = {self.x_var}; y = {self.y_var}"]
         return summary
 
